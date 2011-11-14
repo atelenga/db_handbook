@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Результаты поиска</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 0.20" />
+	<style type="text/css">
+		body{
+		font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		}
+		p, h1, form, button{border:0; margin:0; padding:0;}
+		.spacer{clear:both; height:1px;}
+		#stylized{
+		border:solid 2px #b7ddf2;
+		background:#ebf4fb;
+		}		
+		#stylized p{
+		font-size:11px;
+		color:#666666;
+		font-weight:bold;
+		margin-bottom:20px;
+		border-bottom:solid 1px #b7ddf2;
+		padding-bottom:10px;
+		}
+	</style>
+</head>
+
+<body>
+	<p>Вы искали <strong>{{ query }}</strong></p>
+	<br />
+	<p>Администрация г. Краснодар</p>
+		<ul>			
+			<li>Глава муниципального образования г. Краснодар - Евланов Владимир Лазаревич</li>			
+			<li>Адрес приёмной - 350000, ул. Красная, 122, каб. 87</li>
+			<li>Телефон - 255-43-48</li>
+		</ul>
+	{% if address %}		
+		<p>Административный округ</p>
+		<ul>			
+			<li>Глава административного округа - {{district.adm_chief_name}}</li>			
+			<li>Адрес приёмной - {{district.address}}</li>
+			<li>Телефон - {{district.phone}}</li>
+		</ul>
+		<p>Избирательный округ</p>
+		<ul>			
+			<li>Название - {{senator.precinct}}</li>
+			<li>Депутат по избирательному округу - {{senator.senator_name}}</li>
+			<li>Адрес приёмной - {{senator.address}}</li>
+			<li>Телефон - {{senator.phone}}</li>
+		</ul>
+		<p>Полиция</p>
+		<ul>			
+			<li>Участок - {{police.district}}</li>
+			<li>Участковый - {{police.name}}</li>
+			<li>Адрес - {{police.address}}</li>
+			<li>Телефон - {{police.phone}}</li>
+		</ul>
+		<p>Поликлиника</p>
+		<ul>			
+			<li>Номер - {{policlinic.name}}</li>
+			<li>Главврач - {{policlinic.chief}}</li>
+			<li>Адрес - {{policlinic.p_address}}</li>
+			<li>Телефон - {{policlinic.phone}}</li>
+		</ul>
+		<p>Управляющая компания</p>
+		<ul>			
+			<li>Название - {{hm.name}}</li>
+			<li>Руководитель - {{hm.chief}}</li>
+			<li>Адрес - {{hm.h_address}}</li>
+			<li>Телефон - {{hm.phone}}</li>
+		</ul>
+	{% else %}
+		<p>Не найдено записей</p>
+	{% endif %}
+	
+	<a href="../search/">Назад к поиску</a>
+</body>
+
+</html>
