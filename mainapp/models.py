@@ -80,34 +80,35 @@ class SenatorsDic(models.Model):
 
 class PoliceDistrictInfo(models.Model):
 	name = models.CharField(max_length=100, verbose_name='Название полиц. участка')
+	address = models.CharField(max_length=600, verbose_name='Адрес')
+	phone = models.CharField(max_length=12, verbose_name='Телефон')
 	class Meta:
 		verbose_name='Информация о полицейских участках'
 		verbose_name_plural='Информация о полицейских участках'
 		ordering = ['name']
 	def __unicode__(self):
-		return u'%s' %(self.name)
+		return u'%s %s %s' %(self.name, self.address, self.phone)
 
-class LocalPolicemenDic(models.Model):
-    address = models.ForeignKey(AddressDic, verbose_name='Адрес')
+class LocalPolicemenDic(models.Model):    
     name = models.ForeignKey(PoliceDistrictInfo, verbose_name='Название полиц. участка')
-    class Meta:
-		verbose_name='Список полицейских участков'
-		verbose_name_plural='Список полицейских участков'
-		ordering = ['name']
-    def __unicode__(self):
-		return u'%s %s' %(self.address, self.name)
-
-class LocalPolicemenInfo(models.Model):
-    district = models.ForeignKey(PoliceDistrictInfo,verbose_name='Полиц. участок')
-    name = models.CharField(max_length=256, verbose_name='Имя участкового')
-    address = models.CharField(max_length=600, verbose_name='Адрес')
-    phone = models.CharField(max_length=12, verbose_name='Телефон')
+    policeman = models.CharField(max_length=256, verbose_name='Имя участкового')
+    rank =models.CharField(max_length=100, verbose_name='Звание')
     class Meta:
 		verbose_name='Информация об участковых'
 		verbose_name_plural='Информация об участковых'
-		ordering = ['district']
+		ordering = ['name']
     def __unicode__(self):
-		return u'%s %s %s %s' %(self.district, self.name, self.address, self.phone)
+		return u'%s %s %s' %(self.name, self.policeman, self.rank)
+
+class LocalPolicemenInfo(models.Model):    
+    address = models.ForeignKey(AddressDic, verbose_name='Закреплённый адрес')
+    name = models.ForeignKey(LocalPolicemenDic,verbose_name='Участковый')    
+    class Meta:
+		verbose_name='Список участковых'
+		verbose_name_plural='Список участковых'
+		ordering = ['address']
+    def __unicode__(self):
+		return u'%s %s' %(self.address, self.name)
 	
 class PoliclinicDic(models.Model):    
     name = models.CharField(max_length=256, verbose_name='Название поликлиники')

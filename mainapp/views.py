@@ -35,8 +35,12 @@ def search(request):
 			d = DistrictAdmInfo.objects.get(district=a.district)			
 			p = PrecinctDic.objects.get(address=a.id)
 			s = SenatorsDic.objects.get(precinct=p.precinct)			
-			lpd = LocalPolicemenDic.objects.get(address=a.id)			
-			lpi = LocalPolicemenInfo.objects.get(district=lpd.name)			
+			lpi = LocalPolicemenInfo.objects.get(address=a.id)			
+			print lpi
+			lpd = lpi.name
+			print lpd
+			policed = lpd.name
+			print policed
 			pd = PoliclinicInfo.objects.get(address=a.id)
 			pi = pd.policlinic
 			hmd = HouseManagementInfo.objects.get(address=a.id)
@@ -46,7 +50,8 @@ def search(request):
 			'query':q, 
 			'district':d,
 			'senator':s,
-			'police':lpi,
+			'distr':policed,
+			'policeman':lpd,
 			'policlinic':pi,
 			'hm':hmi
 			})
